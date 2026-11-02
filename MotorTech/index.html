@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MotorTech - Oficina Mecânica</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- SDK JS do Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <h1>Motor<span>Tech</span></h1>
+    </div>
+    <p class="tagline">Portal de Orçamentos & OS</p>
+  </header>
+
+  <div class="container">
+    <!-- FORMULÁRIO DE SOLICITAÇÃO -->
+    <section class="card">
+      <h2>Solicitar Orçamento Preliminar</h2>
+      <form id="form-orcamento">
+        <div class="form-group">
+          <label for="nome">Nome Completo:</label>
+          <input type="text" id="nome" required placeholder="Ex: João Silva">
+        </div>
+
+        <div class="form-group">
+          <label for="telefone">WhatsApp / Telefone:</label>
+          <input type="tel" id="telefone" required placeholder="(11) 99999-9999">
+        </div>
+
+        <div class="form-group">
+          <label for="placa">Placa do Veículo:</label>
+          <input type="text" id="placa" class="uppercase" required placeholder="ABC1D23" maxlength="8">
+        </div>
+
+        <div class="form-group">
+          <label for="modelo">Modelo do Veículo:</label>
+          <input type="text" id="modelo" required placeholder="Ex: Gol 1.6 2019">
+        </div>
+
+        <div class="form-group">
+          <label for="descricao">Descrição da Falha / Problema:</label>
+          <textarea id="descricao" rows="4" required placeholder="Descreva os ruídos, luzes acesas no painel, vazamentos ou revisão desejada..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit" id="btn-enviar">Enviar Solicitação</button>
+      </form>
+    </section>
+
+    <!-- VISUALIZAÇÃO DE ORDENS REGISTRADAS (PAINEL INTERNO) -->
+    <section class="card">
+      <h2>Painel de Triagem (Mecânicos)</h2>
+      <div id="auth-login">
+        <p class="auth-help">Entre com a conta autorizada da oficina para acessar as solicitações.</p>
+        <form id="form-login" class="auth-form">
+          <div class="form-group">
+            <label for="login-email">E-mail:</label>
+            <input type="email" id="login-email" required autocomplete="username">
+          </div>
+          <div class="form-group">
+            <label for="login-senha">Senha:</label>
+            <input type="password" id="login-senha" required autocomplete="current-password">
+          </div>
+          <button type="submit" class="btn-submit" id="btn-login">Entrar no painel</button>
+        </form>
+        <p id="auth-feedback" class="auth-feedback" role="status" aria-live="polite"></p>
+      </div>
+
+      <div id="painel-ordens" hidden>
+        <div class="auth-session">
+          <span>Conectado como <strong id="auth-email"></strong></span>
+          <button type="button" class="btn-logout" id="btn-logout">Sair</button>
+        </div>
+        <div class="os-summary" id="os-summary" aria-label="Resumo das solicitações"></div>
+        <div class="os-toolbar">
+          <label for="os-filter">Mostrar:</label>
+          <select id="os-filter">
+            <option value="Todas">Todas as solicitações</option>
+            <option value="Pendente">Pendentes</option>
+            <option value="Em atendimento">Em atendimento</option>
+            <option value="Concluída">Concluídas</option>
+            <option value="Cancelada">Canceladas</option>
+          </select>
+        </div>
+        <p id="os-feedback" class="os-feedback" role="status" aria-live="polite"></p>
+        <div id="os-container" class="os-list">
+          <p class="muted-message">Carregando solicitações...</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Oficina Mecânica MotorTech — João Pietro Rodrigues do Nascimento | Desenvolvido para avaliação SENAI</p>
+  </footer>
+
+</body>
+</html>
